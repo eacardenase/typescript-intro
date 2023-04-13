@@ -4,7 +4,8 @@ import viteLogo from '/vite.svg';
 import { setupCounter } from './counter';
 
 // import { bulbasaur, pokemons } from './bases/02-objects';
-import { charmander } from './bases/04-injection';
+// import { charmander } from './bases/04-injection';
+import { charmander } from './bases/06-decorators';
 
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
   <div>
