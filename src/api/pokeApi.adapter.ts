@@ -1,10 +1,14 @@
 import axios from 'axios';
 
-export class PokeApiAdapter {
+export interface HttpAdapter {
+    get<T>(url: string): Promise<T>;
+}
+
+export class PokeApiAxiosAdapter implements HttpAdapter {
     private readonly axios = axios;
 
-    async get(url: string) {
-        const { data } = await this.axios.get(url);
+    async get<T>(url: string): Promise<T> {
+        const { data } = await this.axios.get<T>(url);
 
         return data;
     }
@@ -19,5 +23,15 @@ export class PokeApiAdapter {
 
     async delete(url: string) {
         return;
+    }
+}
+
+export class PokeApiFetchAdapter implements HttpAdapter {
+    async get<T>(url: string): Promise<T> {
+        const resp = await fetch(url);
+        // const data = (await resp.json()) as T;
+        const data: T = (await resp.json()) as T;
+
+        return data;
     }
 }
